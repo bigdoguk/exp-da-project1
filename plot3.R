@@ -1,0 +1,11 @@
+x<-read.table("household_power_consumption.txt",header=TRUE,sep=";")
+x<- x[as.Date(x[,1],format="%d/%m/%Y")=="2007-02-01"|as.Date(x[,1],format="%d/%m/%Y")=="2007-02-02",]
+z<-paste(x[,1],x[,2])
+z<-strptime(z,"%d/%m/%Y %H:%M:%S")
+png("plot3.png", width=480, height=480)
+plot(z,as.numeric(as.character(x[,7])),xlab="",ylab="Energy sub metering", type="n")
+lines(z,as.numeric(as.character(x[,7])),col="black")
+lines(z,as.numeric(as.character(x[,8])),col="red")
+lines(z,as.numeric(as.character(x[,9])),col="blue")
+legend("topright",c("Sub_metering_1","Sub_metering_2","Sub_metering_3"),lty=c(1,1,1),lwd=c(2,2,2),col=c("black","red","blue"))
+dev.off()
